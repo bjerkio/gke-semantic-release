@@ -22,7 +22,7 @@ activate_gcloud() {
     echo "Activated Google Requirements"
 }
 
-push_to_google_container_registry() {
+docker_push() {
     docker push $IMAGE_NAME
     echo "Pushed to Google Container Registry"
 }
@@ -46,7 +46,6 @@ else
     if [ -z "$PUSH_TO_GCR" ]; then
         echo "Skip: Pushing to Google Container Registry"
     else
-        push_to_google_container_registry
         if [ -z "$GCLOUD_CLUSTER" ]; then
             echo "Skip: Get Google Kubernetes Engine container credentials"
         else
@@ -56,6 +55,7 @@ else
             fi
             gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_ZONE --project $GCLOUD_PROJECT
         fi
+        docker_push
     fi
 fi
 if [ -z "$DEPLOYMENT_NAME" ]; then
