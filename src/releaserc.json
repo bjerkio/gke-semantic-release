@@ -4,7 +4,7 @@
         "@semantic-release/release-notes-generator",
         "@semantic-release/git",
         ["@semantic-release/exec", {
-            "publishCmd": "/build/release.sh ${nextRelease.version}"
+            "publishCmd": "/builder/release.sh ${nextRelease.version}"
         }]
     ]
 }
