@@ -36,14 +36,20 @@ docker tag $IMAGE_NAME $IMAGE_NAME:$LATEST_TAG
 docker tag $IMAGE_NAME $IMAGE_NAME:$VERSION
 
 if [ -z "$GCLOUD_API_KEYFILE" ]; then
+    echo "Skip: gcloud related steps (missing GCLOUD_API_KEYFILE)"
+else
     if [ -z "$GCLOUD_PROJECT" ]; then
         echo "Error: Missing GCLOUD_PROJECT environment variable"
         exit 1
     fi
     activate_gcloud
     if [ -z "$PUSH_TO_GCR" ]; then
+        echo "Skip: Pushing to Google Container Registry"
+    else
         push_to_google_container_registry
         if [ -z "$GCLOUD_CLUSTER" ]; then
+            echo "Skip: Get Google Kubernetes Engine container credentials"
+        else
             if [ -z "$GCLOUD_ZONE" ]; then
                 echo "Error: Missing GCLOUD_ZONE environment variable"
                 exit 1
@@ -53,6 +59,8 @@ if [ -z "$GCLOUD_API_KEYFILE" ]; then
     fi
 fi
 if [ -z "$DEPLOYMENT_NAME" ]; then
+    echo "Skip: Deployment to Kubernetes"
+else
     set_development_image
 fi
 
