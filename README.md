@@ -31,7 +31,7 @@ A builder image Google Cloud (Kubernetes Engine) using Semantic Release. Comes w
 Installing dependencies is wasteful time, and since we (Bjerk) have so many projects that requires the ones included in this Dockerfile – we figured it's time to Open Source it. Probably a few more than just us.
 
 # Environment Variables
-These environment variables relates to `semantic-release` configuration that comes with this image. By default the `CMD` is set to have `--extends /builder/releaserc.json`. This uses `semantic-release`'s plugins; `commit-analyzer`, `release-notes-generator`, `git`, `exec`.
+These environment variables relates to `semantic-release` configuration and the included builder utility. By default the `CMD` is set to have `--extends /builder/releaserc.json`, this uses `semantic-release`'s plugins; `commit-analyzer`, `release-notes-generator`, `git`, `exec`.
 The `exec` step runs a Shell-script in `/builder/release.sh`. This script activates the `gcloud` command utility with a service account provided by the `GCLOUD_API_KEYFILE`. If provided, it also pushes the built Dockerfile (built by your CI/CD pipeline) in a separate step before it deploys the image to your Kubernetes cluster (read more about this under `DEPLOYMENT_NAME`).
 
 ## I just want the dependencies in an image.
