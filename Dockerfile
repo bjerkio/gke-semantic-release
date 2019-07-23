@@ -15,7 +15,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
 
 # Add semantic release
 RUN cd /builder/ && npm install && chmod +x /builder/release.sh
-ENV PATH /build/node_modules/.bin/:$PATH
+ENV PATH /builder/node_modules/.bin/:$PATH
 
 RUN gcloud --version && \
     kubectl version --client && \
