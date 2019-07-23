@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/exec": "^3.3.2",
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/release-notes-generator": "^7.1.4",
+    "semantic-release": "^15.13.3"
+  },
+  "name": "gke-semantic-release",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bjerkio/gke-semantic-release.git"
+  },
+  "author": "Bjerk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bjerkio/gke-semantic-release/issues"
+  },
+  "homepage": "https://github.com/Bjerkio/gke-semantic-release#readme",
+  "description": "A builder image Google Cloud (Kubernetes Engine) using Semantic Release"
+}
