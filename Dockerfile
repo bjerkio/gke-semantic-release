@@ -23,6 +23,6 @@ RUN gcloud --version && \
     npm -v && \
     semantic-release -v
 
-CMD ["--branch ${RELEASE_BRANCH}", "--extends /build/releaserc.json"]
+CMD ["--branch ${RELEASE_BRANCH}", "--extends /builder/releaserc.json"]
 
 ENTRYPOINT [ "semantic-release" ]
