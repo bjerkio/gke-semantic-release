@@ -53,7 +53,7 @@ else
         gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_ZONE --project $GCLOUD_PROJECT
     fi
 fi
-if [[ $PUSH_TO_GCR != "true" ]]; then
+if [[ $DOCKER_PUSH != "true" ]]; then
     echo "Skip: Pushing to Docker Registry"
 else
     docker_push
