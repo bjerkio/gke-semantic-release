@@ -67,6 +67,9 @@ This is the name of the Kubernetes deployment. When this variable is set, the bu
 run this command.
 `kubectl set image deployment $DEPLOYMENT_NAME $DEPLOYMENT_NAME=$IMAGE_NAME:$VERSION --record`
 
+### `DEPLOYMENT_NAMESPACE`
+If applied, namespace attribute are added to `set image deployment` operation.
+
 ### `RELEASE_BRANCH` (default = `master`)
 When using default `ENTRYPOINT` command (`semantic-release`). We run the command with `--branch` arguments and `RELEASE_BRANCH` are used to fill this argument.
 

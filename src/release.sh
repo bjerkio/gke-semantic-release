@@ -28,7 +28,11 @@ docker_push() {
 }
 
 set_development_image() {
-    kubectl set image deployment $DEPLOYMENT_NAME $DEPLOYMENT_NAME=$IMAGE_NAME:$VERSION --record
+    if [ -z "$DEPLOYMENT_NAMESPACE" ]; then
+        kubectl set image deployment $DEPLOYMENT_NAME $DEPLOYMENT_NAME=$IMAGE_NAME:$VERSION --record
+    else
+        kubectl set image deployment $DEPLOYMENT_NAME $DEPLOYMENT_NAME=$IMAGE_NAME:$VERSION --record --namespace $DEPLOYMENT_NAMESPACE
+    fi
     echo "Changed image on `$DEPLOYMENT_NAME` deployment"
 }
 
