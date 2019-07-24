@@ -2,7 +2,7 @@
 
 [![docker automated build](https://img.shields.io/docker/cloud/automated/bjerk/gke-semantic-release.svg)](https://hub.docker.com/r/bjerk/gke-semantic-release)
 
-A builder image Google Cloud (Kubernetes Engine) using [Semantic Release](https://github.com/semantic-release/semantic-release). Comes with a [builder utility](/src/release.sh) that can fully build a Docker image, tag it, upload to Google Container Registry and deploy it to Kubernetes Engine (or any Kubernetes). Production-ready (as production ready a builder image could be).
+A builder image Google Cloud (Kubernetes Engine) using [Semantic Release](https://github.com/semantic-release/semantic-release). Comes with an opinionated [builder utility](/src/release.sh) that can fully build a Docker image, tag it, upload to Google Container Registry and deploy it to Kubernetes Engine (or any Kubernetes). Production-ready (as production ready a builder image could be).
 
 # Quick reference
 
@@ -26,16 +26,19 @@ A builder image Google Cloud (Kubernetes Engine) using [Semantic Release](https:
  - gcloud
  - gsutil
 
-# Motivation
+## Customize `semantic-release`
+When using the opinionated builder utility, you are (at this time) limited to using the [dependencies](src/package.json). However, you can always use `semantic-release` with your
+dependencies and configuration. 
 
+In any folder in your repository, add a `package.json` containing e.g. `@semantic-release/changelog` as a dependency and a `semantic-release` [configuration](https://semantic-release.gitbook.io/semantic-release/usage/configuration). Install these dependencies with your build pipeline and run `semantic-release` command. The `semantic-release` is added to `PATH` (meaning it's globally installed in the Docker image).
+
+# Motivation
 Installing dependencies is wasteful time, and since we (Bjerk) have so many projects that requires the ones included in this Dockerfile – we figured it's time to Open Source it. Probably a few more than just us.
+
 
 # Environment Variables
 These environment variables relates to `semantic-release` configuration and the included builder utility. By default the `CMD` is set to have `--extends /builder/releaserc.json`, this uses `semantic-release`'s plugins; `commit-analyzer`, `release-notes-generator`, `git`, `exec`.
 The `exec` step runs a Shell-script in `/builder/release.sh`. This script activates the `gcloud` command utility with a service account provided by the `GCLOUD_API_KEYFILE`. If provided, it also pushes the built Dockerfile (built by your CI/CD pipeline) in a separate step before it deploys the image to your Kubernetes cluster (read more about this under `DEPLOYMENT_NAME`).
-
-## I just want the dependencies in an image.
-Just use the image as you'd like. You don't have to run semantic-release, use the default builder scripts or configuration files. In most CI/CD solutions, you have to write your own command lines anyway – so go at it!
 
 ### `IMAGE_NAME` (required)
 Name of the image. E.g. `us.gcr.io/my-project/image`. The version will be appended incl. `latest`.
@@ -45,6 +48,9 @@ When the `DOCKER_PUSH` environment variable is set to `true` (case-sensitive) th
 will run `docker push` on the `IMAGE_NAME` image. This is set by default to `true`.
 
 ### `GCLOUD_API_KEYFILE`
+The `GCLOUD_API_KEYFILE` must be a base64 encoded Google Service Account key that
+has access to Google Container Registry and Kubernetes Engine. If not applied,
+no Google-releated functionality will be activated.
 
 ### `GCLOUD_PROJECT`
 Your Google Cloud Platform project id. Required when GCLOUD_API_KEYFILE is applied.
