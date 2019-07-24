@@ -43,20 +43,20 @@ else
         exit 1
     fi
     activate_gcloud
-    if [ -z "$PUSH_TO_GCR" ]; then
-        echo "Skip: Pushing to Google Container Registry"
+    if [ -z "$GCLOUD_CLUSTER" ]; then
+        echo "Skip: Get Google Kubernetes Engine container credentials"
     else
-        if [ -z "$GCLOUD_CLUSTER" ]; then
-            echo "Skip: Get Google Kubernetes Engine container credentials"
-        else
-            if [ -z "$GCLOUD_ZONE" ]; then
-                echo "Error: Missing GCLOUD_ZONE environment variable"
-                exit 1
-            fi
-            gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_ZONE --project $GCLOUD_PROJECT
+        if [ -z "$GCLOUD_ZONE" ]; then
+            echo "Error: Missing GCLOUD_ZONE environment variable"
+            exit 1
         fi
-        docker_push
+        gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_ZONE --project $GCLOUD_PROJECT
     fi
+fi
+if [[ $PUSH_TO_GCR != "true" ]]; then
+    echo "Skip: Pushing to Docker Registry"
+else
+    docker_push
 fi
 if [ -z "$DEPLOYMENT_NAME" ]; then
     echo "Skip: Deployment to Kubernetes"

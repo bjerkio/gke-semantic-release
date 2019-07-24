@@ -2,9 +2,9 @@ FROM google/cloud-sdk:alpine
 
 ADD ./src /builder
 
-# nvm environment variables
 ENV RELEASE_BRANCH master
 ENV LATEST_TAG latest
+ENV DOCKER_PUSH true
 
 RUN apk add curl bash nodejs nodejs-npm yarn
 

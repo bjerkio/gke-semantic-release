@@ -40,8 +40,11 @@ Just use the image as you'd like. You don't have to run semantic-release, use th
 ### `IMAGE_NAME` (required)
 Name of the image. E.g. `us.gcr.io/my-project/image`. The version will be appended incl. `latest`.
 
+### `DOCKER_PUSH` (default = true)
+When the `DOCKER_PUSH` environment variable is set to `true` (case-sensitive) the builder utility
+will run `docker push` on the `IMAGE_NAME` image. This is set by default to `true`.
+
 ### `GCLOUD_API_KEYFILE`
-When this is applied (along with the environment variables below), the builder will push the Docker file to Google Container Registry.
 
 ### `GCLOUD_PROJECT`
 Your Google Cloud Platform project id. Required when GCLOUD_API_KEYFILE is applied.
@@ -68,7 +71,7 @@ can change this from `latest` to what you'd like with setting this environment v
 
 # Contribute
 
-We are very much open to changes this this image. Opinions are welcome as issues (please tag them, that helps). Please open PRs or get in touch!
+We are very much open to changes on this image. Opinions are welcome as issues (please tag them, that helps). Please open PRs or get in touch!
 
 ## License
 
