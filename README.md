@@ -1,6 +1,6 @@
 # Google Kubernetes Engine (/w Semantic Release)
 
-[![docker automated build](https://img.shields.io/docker/cloud/automated/bjerk/gke-semantic-release.svg)](https://hub.docker.com/r/bjerk/gke-semantic-release)
+[![docker automated build](https://img.shields.io/docker/cloud/automated/bjerk/gke-semantic-release.svg)](https://hub.docker.com/r/bjerk/gke-semantic-release) [![Greenkeeper badge](https://badges.greenkeeper.io/Bjerkio/gke-semantic-release.svg)](https://greenkeeper.io/)
 
 A builder image Google Cloud (Kubernetes Engine) using [Semantic Release](https://github.com/semantic-release/semantic-release). Comes with an opinionated [builder utility](/src/release.sh) that can fully build a Docker image, tag it, upload to Google Container Registry and deploy it to Kubernetes Engine (or any Kubernetes). Production-ready (as production ready a builder image could be).
 
