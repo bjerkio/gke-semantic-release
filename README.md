@@ -1,8 +1,13 @@
-# Google Kubernetes Engine (/w Semantic Release)
+# (Depreciated) Google Kubernetes Engine (/w Semantic Release)
 
 [![docker automated build](https://img.shields.io/docker/cloud/automated/bjerk/gke-semantic-release.svg)](https://hub.docker.com/r/bjerk/gke-semantic-release)
 
 A builder image Google Cloud (Kubernetes Engine) using [Semantic Release](https://github.com/semantic-release/semantic-release). Comes with an opinionated [builder utility](/src/release.sh) that can fully build a Docker image, tag it, upload to Google Container Registry and deploy it to Kubernetes Engine (or any Kubernetes). Production-ready (as production ready a builder image could be).
+
+**This package has been depreciated**: This package will no longer get any updates from @bjerkio. Reasons can be read about in [#1](https://github.com/bjerkio/gke-semantic-release/issues/1), in summary; We don't use this anymore. 
+
+For users of this library, we suggest go-semantic-release – a lightweight alternative to Semantic Release, and use gcloud directly in your CI/CD flow (or take over the library, let us know in [issues](https://github.com/Bjerkio/gke-semantic-release/issues)).
+
 
 # Quick reference
 
